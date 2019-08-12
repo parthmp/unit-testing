@@ -4,22 +4,23 @@
 
     use App\Calculator\Exceptions\NoOperandsException;
 
-    class Division implements OperationInterface{
-
-        protected $operands = [];
-
-        public function setOperands(array $operands){
-            $this->operands = $operands;
-        }
+    class Division extends OperationAbstract implements OperationInterface{
 
         public function calculate(){
 
             if(count($this->operands) === 0){
                 throw new NoOperandsException;
             }
-            
-            
-            return 50;
+
+            return array_reduce(array_filter($this->operands), function($a, $b){
+                
+                if($a != null && $b != null){
+                    return $a/$b;
+                }
+
+                return $b;
+
+            }, null);
             
             
         }

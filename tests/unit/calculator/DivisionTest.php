@@ -15,4 +15,22 @@
 
         }
 
+        /** @test */
+        public function removes_division_by_zeo_operands(){
+
+            $division = new \App\Calculator\Division;
+            $division->setOperands([10, 0, 0, 5, 0]);
+            $this->assertEquals(2, $division->calculate());
+
+        }
+
+        /** @test */
+        public function no_operands_given_throws_exception_when_calculating(){
+
+            $this->expectException(\App\Calculator\Exceptions\NoOperandsException::class);
+            $addition = new \App\Calculator\Division;
+            $addition->calculate();
+
+        }
+
     }
